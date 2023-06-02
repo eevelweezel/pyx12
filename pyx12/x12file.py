@@ -305,7 +305,7 @@ class X12Reader(X12Base):
             if src_file_obj == '-':
                 self.fd_in = sys.stdin
             else:
-                self.fd_in = open(src_file_obj, 'U', encoding='ascii')
+                self.fd_in = open(src_file_obj, 'r', encoding='ascii')
                 self.need_to_close = True
         X12Base.__init__(self)
         try:
@@ -362,7 +362,7 @@ class X12Reader(X12Base):
             if self._int(seg_data.get_value('GE01')) != self.st_count:
                 err_str = 'GE count of {} for GE02={} is wrong. I count {}'.format(\
                     seg_data.get_value('GE01'),
-                    seg_data.get_value('GE02'), 
+                    seg_data.get_value('GE02'),
                     self.st_count)
                 self._gs_error('5', err_str)
             del self.loops[-1]
@@ -376,7 +376,7 @@ class X12Reader(X12Base):
             if self._int(seg_data.get_value('SE01')) != self.seg_count + 1:
                 err_str = 'SE count of {} for SE02={} is wrong. I count {}'.format(\
                     seg_data.get_value('SE01'),
-                    se_trn_control_num, 
+                    se_trn_control_num,
                     self.seg_count + 1)
                 self._st_error('4', err_str)
             del self.loops[-1]
